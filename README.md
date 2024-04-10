@@ -15,8 +15,8 @@ Why
 ---
 MacPorts is powerful but finicky. I commonly end up with MySQL with
 the wrong permissions and other annoyances. Therefore this script, which will
-reliably install MySQL and PHP 7.3/7.4/8.1 plus Apache 2.4 on macOS. 
-At least, for me. Tested with MacPorts 2.9.2 on OS X 14.3.1.
+reliably install MySQL and PHP 7.3/7.4/8.1/8.2/8.3 plus Apache 2.4 on macOS. 
+At least, for me. Tested with MacPorts 2.9.2 on OS X 14.4.1.
 
 Prerequisites
 -------------
@@ -100,7 +100,7 @@ at the command line:
 te - tail Apache error log
 ta - tail Apache access log
 tp - tail PHP error log
-acr - apachectl restart (really sudo port unload apache2;sudo port load apache2)
+acr - apachectl restart (really sudo port unload apache2;sleep 5;sudo port load apache2)
 ```
 
 Running the Scripts
@@ -114,6 +114,9 @@ sudo ./increase_limits
 ```
 
 Switching between PHP 7.3, PHP 7.4 and PHP 8.1:
+
+1. Use the port select command to select your command-line version of PHP.
+2. Use apxs to tell Apache to disable all modules except the one you want.
 
 Switch to PHP 8.1:
 ```

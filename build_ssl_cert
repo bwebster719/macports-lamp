@@ -8,7 +8,7 @@ if [ -z "$SUDO_USER" ]; then
 fi
 
 # Build local cert.
-if [ ! -d /opt/local/etc/apache22 ]; then
+if [ ! -d /opt/local/etc/apache2 ]; then
   echo "An Apache installation is required. Please run ./build_lamp first."
   exit 1
 fi

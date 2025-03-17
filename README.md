@@ -15,7 +15,7 @@ Why
 ---
 MacPorts is powerful but finicky. I commonly end up with MySQL with
 the wrong permissions and other annoyances. Therefore this script, which will
-reliably install MySQL and PHP 7.3/7.4/8.1/8.2/8.3 plus Apache 2.4 on macOS. 
+reliably install MySQL and PHP 8.0/8.1/8.2/8.3 plus Apache 2.4 on macOS. 
 At least, for me. Tested with MacPorts 2.9.2 on OS X 14.4.1.
 
 Prerequisites
@@ -113,37 +113,49 @@ sudo ./build_mysql
 sudo ./increase_limits
 ```
 
-Switching between PHP 7.3, PHP 7.4 and PHP 8.1:
+Switching between PHP versions
 
 1. Use the port select command to select your command-line version of PHP.
 2. Use apxs to tell Apache to disable all modules except the one you want.
 
+Switch to PHP 8.0:
+```
+sudo port select php php80
+sudo /opt/local/bin/apxs -A -e -n php mod_php81.so
+sudo /opt/local/bin/apxs -A -e -n php mod_php82.so
+sudo /opt/local/bin/apxs -A -e -n php mod_php83.so
+sudo /opt/local/bin/apxs -a -e -n php mod_php80.so
+acr
+```
+
 Switch to PHP 8.1:
 ```
 sudo port select php php81
-sudo /opt/local/bin/apxs -A -e -n php7 mod_php73.so
-sudo /opt/local/bin/apxs -A -e -n php7 mod_php74.so
+sudo /opt/local/bin/apxs -A -e -n php mod_php80.so
+sudo /opt/local/bin/apxs -A -e -n php mod_php82.so
+sudo /opt/local/bin/apxs -A -e -n php mod_php83.so
 sudo /opt/local/bin/apxs -a -e -n php mod_php81.so
 acr
 ```
 
-Switch to PHP 7.4:
+Switch to PHP 8.2:
 ```
-sudo port select php php74
+sudo port select php php80
+sudo /opt/local/bin/apxs -A -e -n php mod_php80.so
 sudo /opt/local/bin/apxs -A -e -n php mod_php81.so
-sudo /opt/local/bin/apxs -A -e -n php7 mod_php73.so
-sudo /opt/local/bin/apxs -a -e -n php7 mod_php74.so
+sudo /opt/local/bin/apxs -A -e -n php mod_php83.so
+sudo /opt/local/bin/apxs -a -e -n php mod_php82.so
 acr
 ```
 
-Switch to PHP 7.3:
+Switch to PHP 8.3:
 ```
-sudo port select php php73
+sudo port select php php80
+sudo /opt/local/bin/apxs -A -e -n php mod_php80.so
 sudo /opt/local/bin/apxs -A -e -n php mod_php81.so
-sudo /opt/local/bin/apxs -A -e -n php7 mod_php74.so
-sudo /opt/local/bin/apxs -a -e -n php7 mod_php73.so
+sudo /opt/local/bin/apxs -A -e -n php mod_php82.so
+sudo /opt/local/bin/apxs -a -e -n php mod_php83.so
 acr
-
 ```
 
 If you disabled System Integrity Protection earlier, don't forget to [reenable it](https://developer.apple.com/documentation/security/disabling_and_enabling_system_integrity_protection). You can check if it is enabled by typing `csrutil status` in Terminal.
@@ -155,9 +167,9 @@ If the MySQL installation messed up somehow, and you want to try it again, use t
 following to clean up and retry:
 
 ```
-sudo port unload mysql57-server
-sudo port uninstall mysql57-server
-sudo rm -rf /opt/local/var/db/mysql57/
+sudo port unload mysql8-server
+sudo port uninstall mysql8-server
+sudo rm -rf /opt/local/var/db/mysql8/
 sudo ./build_mysql 
 ```
 

@@ -252,7 +252,7 @@ echo
 echo "MySQL was not installed. To install, run separate script build_mysql."
 echo "Complete. Open a new Terminal window for profile settings to take effect."
 echo
-echo "PHP 8.3, 8.2, 8.1, 7.4 and 7.3 have been installed. PHP 8.1 is selected already."
+echo "PHP 8.3, 8.2, 8.1, and 8.0 have been installed. PHP 8.1 is selected already."
 echo "To switch back and forth:"
 echo
 echo "1. Use the port select command to select your command-line version of PHP."

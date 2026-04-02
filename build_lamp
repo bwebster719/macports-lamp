@@ -41,58 +41,6 @@ port -N install apache2
 defSock='/opt/local/var/run/mysql8/mysqld.sock'
 
 
-# Install PHP 8.0.
-port -N install php80-apache2handler
-port -N install php80-mysql +mysql8
-port -N install php80-gd php80-mbstring php80-mcrypt php80-opcache
-port -N install php80-iconv php80-xdebug php80-openssl
-port -N install php80-curl
-port -N install php80-gmp
-port -N install php80-ldap
-
-cat /opt/local/etc/php80/php.ini-development | sed \
-  -e "s#pdo_mysql\.default_socket.*#pdo_mysql\.default_socket=${defSock}#" \
-  -e "s#mysql\.default_socket.*#mysql\.default_socket=${defSock}#" \
-  -e "s#mysqli\.default_socket.*#mysqli\.default_socket=${defSock}#" > /opt/local/etc/php80/php.ini
-echo "date.timezone = 'America/Chicago'" >> /opt/local/etc/php80/php.ini
-echo "error_log = /var/log/php.log" >> /opt/local/etc/php80/php.ini
-echo "xdebug.output_dir = '/tmp'" >> /opt/local/etc/php80/php.ini
-echo "xdebug.mode = profile" >> /opt/local/etc/php80/php.ini
-# Increase memory limit to 1024M
-sed -Ei '' 's/(memory_limit = )[0-9]+M/\11024M/g' /opt/local/etc/php80/php.ini
-# Increase file upload size to 75M
-sed -Ei '' 's/(upload_max_filesize = )[0-9]+M/\175M/g' /opt/local/etc/php80/php.ini
-sed -Ei '' 's/(post_max_size = )[0-9]+M/\175M/g' /opt/local/etc/php80/php.ini
-# Increase max_execution_time to 8 minutes
-sed -Ei '' 's/(max_execution_time = )[0-9]+/\1480/g' /opt/local/etc/php80/php.ini
-/opt/local/bin/apxs -a -e -n php mod_php80.so
-
-# Install PHP 8.1.
-port -N install php81-apache2handler
-port -N install php81-mysql +mysql8
-port -N install php81-gd php81-mbstring php81-mcrypt php81-opcache
-port -N install php81-iconv php81-xdebug php81-openssl
-port -N install php81-curl
-port -N install php81-gmp
-port -N install php81-ldap
-
-cat /opt/local/etc/php81/php.ini-development | sed \
-  -e "s#pdo_mysql\.default_socket.*#pdo_mysql\.default_socket=${defSock}#" \
-  -e "s#mysql\.default_socket.*#mysql\.default_socket=${defSock}#" \
-  -e "s#mysqli\.default_socket.*#mysqli\.default_socket=${defSock}#" > /opt/local/etc/php81/php.ini
-echo "date.timezone = 'America/Chicago'" >> /opt/local/etc/php81/php.ini
-echo "error_log = /var/log/php.log" >> /opt/local/etc/php81/php.ini
-echo "xdebug.output_dir = '/tmp'" >> /opt/local/etc/php81/php.ini
-echo "xdebug.mode = profile" >> /opt/local/etc/php81/php.ini
-# Increase memory limit to 1024M
-sed -Ei '' 's/(memory_limit = )[0-9]+M/\11024M/g' /opt/local/etc/php81/php.ini
-# Increase file upload size to 75M
-sed -Ei '' 's/(upload_max_filesize = )[0-9]+M/\175M/g' /opt/local/etc/php81/php.ini
-sed -Ei '' 's/(post_max_size = )[0-9]+M/\175M/g' /opt/local/etc/php81/php.ini
-# Increase max_execution_time to 8 minutes
-sed -Ei '' 's/(max_execution_time = )[0-9]+/\1480/g' /opt/local/etc/php81/php.ini
-/opt/local/bin/apxs -a -e -n php mod_php81.so
-
 # Install PHP 8.2.
 port -N install php82-apache2handler
 port -N install php82-mysql +mysql8
@@ -101,6 +49,8 @@ port -N install php82-iconv php82-xdebug php82-openssl
 port -N install php82-curl
 port -N install php82-gmp
 port -N install php82-ldap
+port -N install php82-zip
+port -N install php82-soap
 
 cat /opt/local/etc/php82/php.ini-development | sed \
   -e "s#pdo_mysql\.default_socket.*#pdo_mysql\.default_socket=${defSock}#" \
@@ -127,6 +77,8 @@ port -N install php83-iconv php83-xdebug php83-openssl
 port -N install php83-curl
 port -N install php83-gmp
 port -N install php83-ldap
+port -N install php83-zip
+port -N install php83-soap
 
 cat /opt/local/etc/php83/php.ini-development | sed \
   -e "s#pdo_mysql\.default_socket.*#pdo_mysql\.default_socket=${defSock}#" \
@@ -144,6 +96,35 @@ sed -Ei '' 's/(post_max_size = )[0-9]+M/\175M/g' /opt/local/etc/php83/php.ini
 # Increase max_execution_time to 8 minutes
 sed -Ei '' 's/(max_execution_time = )[0-9]+/\1480/g' /opt/local/etc/php83/php.ini
 /opt/local/bin/apxs -A -e -n php mod_php83.so
+
+# Install PHP 8.4.
+port -N install php84-apache2handler
+port -N install php84-mysql +mysql8
+port -N install php84-gd php84-mbstring php84-mcrypt php84-opcache
+port -N install php84-iconv php84-xdebug php84-openssl
+port -N install php84-curl
+port -N install php84-gmp
+port -N install php84-ldap
+port -N install php84-zip
+port -N install php84-soap
+
+cat /opt/local/etc/php84/php.ini-development | sed \
+  -e "s#pdo_mysql\.default_socket.*#pdo_mysql\.default_socket=${defSock}#" \
+  -e "s#mysql\.default_socket.*#mysql\.default_socket=${defSock}#" \
+  -e "s#mysqli\.default_socket.*#mysqli\.default_socket=${defSock}#" > /opt/local/etc/php84/php.ini
+echo "date.timezone = 'America/Chicago'" >> /opt/local/etc/php84/php.ini
+echo "error_log = /var/log/php.log" >> /opt/local/etc/php84/php.ini
+echo "xdebug.output_dir = '/tmp'" >> /opt/local/etc/php84/php.ini
+echo "xdebug.mode = profile" >> /opt/local/etc/php84/php.ini
+# Increase memory limit to 1024M
+sed -Ei '' 's/(memory_limit = )[0-9]+M/\11024M/g' /opt/local/etc/php84/php.ini
+# Increase file upload size to 75M
+sed -Ei '' 's/(upload_max_filesize = )[0-9]+M/\175M/g' /opt/local/etc/php84/php.ini
+sed -Ei '' 's/(post_max_size = )[0-9]+M/\175M/g' /opt/local/etc/php84/php.ini
+# Increase max_execution_time to 8 minutes
+sed -Ei '' 's/(max_execution_time = )[0-9]+/\1480/g' /opt/local/etc/php84/php.ini
+/opt/local/bin/apxs -A -e -n php mod_php84.so
+
 
 # PHP will log errors to /var/log/php.log.
 touch /var/log/php.log
@@ -238,7 +219,7 @@ mv /usr/bin/phpize /usr/bin/phpize.stock
 echo "OK, start paying attention to errors again."
 
 # Map php, php-config, phpize to php81.
-port select php php81
+port select php php83
 
 # Use GNU patch
 port install gpatch
@@ -252,7 +233,7 @@ echo
 echo "MySQL was not installed. To install, run separate script build_mysql."
 echo "Complete. Open a new Terminal window for profile settings to take effect."
 echo
-echo "PHP 8.3, 8.2, 8.1, and 8.0 have been installed. PHP 8.1 is selected already."
+echo "PHP 8.4, 8.3, and 8.2 have been installed. PHP 8.3 is selected already."
 echo "To switch back and forth:"
 echo
 echo "1. Use the port select command to select your command-line version of PHP."
@@ -260,36 +241,26 @@ echo "2. Use apxs to tell Apache to disable all modules except the one you want.
 echo
 echo "Examples:"
 echo
-echo "Switch to PHP 8.0:"
-echo "sudo port select php php80"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php81.so"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php82.so"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php83.so"
-echo "sudo /opt/local/bin/apxs -a -e -n php mod_php80.so"
-echo "acr"
-echo
-echo "Switch to PHP 8.1:"
-echo "sudo port select php php81"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php80.so"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php82.so"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php83.so"
-echo "sudo /opt/local/bin/apxs -a -e -n php mod_php81.so"
-echo "acr"
 echo
 echo "Switch to PHP 8.2:"
 echo "sudo port select php php82"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php80.so"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php81.so"
 echo "sudo /opt/local/bin/apxs -A -e -n php mod_php83.so"
+echo "sudo /opt/local/bin/apxs -A -e -n php mod_php84.so"
 echo "sudo /opt/local/bin/apxs -a -e -n php mod_php82.so"
 echo "acr"
 echo
 echo "Switch to PHP 8.3:"
 echo "sudo port select php php83"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php80.so"
-echo "sudo /opt/local/bin/apxs -A -e -n php mod_php81.so"
 echo "sudo /opt/local/bin/apxs -A -e -n php mod_php82.so"
+echo "sudo /opt/local/bin/apxs -A -e -n php mod_php84.so"
 echo "sudo /opt/local/bin/apxs -a -e -n php mod_php83.so"
+echo "acr"
+echo
+echo "Switch to PHP 8.4:"
+echo "sudo port select php php84"
+echo "sudo /opt/local/bin/apxs -A -e -n php mod_php82.so"
+echo "sudo /opt/local/bin/apxs -A -e -n php mod_php83.so"
+echo "sudo /opt/local/bin/apxs -a -e -n php mod_php84.so"
 echo "acr"
 echo
 echo 'Note that if MacPorts put its $PATH modification code into .profile then'

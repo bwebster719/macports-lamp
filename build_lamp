@@ -158,7 +158,7 @@ echo "127.0.0.1 local.test" >> /etc/hosts
 sed -i '' -e 's,#\(Include etc/apache2/extra/httpd-vhosts.conf\),\1,g' /opt/local/etc/apache2/httpd.conf
 sed -i '' -e 's,#\(Include etc/apache2/extra/httpd-default.conf\),\1,g' /opt/local/etc/apache2/httpd.conf
 echo "ServerName $FQHN:80" >> /opt/local/etc/apache2/httpd.conf
-echo "Include etc/apache2/extra/mod_php81.conf" >> /opt/local/etc/apache2/httpd.conf
+echo "Include etc/apache2/extra/mod_php83.conf" >> /opt/local/etc/apache2/httpd.conf
 echo "<VirtualHost *:80>" >> /opt/local/etc/apache2/extra/httpd-vhosts.conf
 echo "    ServerName local.test" >> /opt/local/etc/apache2/extra/httpd-vhosts.conf
 echo "    DocumentRoot "$HOME/Sites"" >> /opt/local/etc/apache2/extra/httpd-vhosts.conf
@@ -218,7 +218,7 @@ mv /usr/bin/php-config /usr/bin/php-config.stock
 mv /usr/bin/phpize /usr/bin/phpize.stock
 echo "OK, start paying attention to errors again."
 
-# Map php, php-config, phpize to php81.
+# Map php, php-config, phpize to php83.
 port select php php83
 
 # Use GNU patch
